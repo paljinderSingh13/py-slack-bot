@@ -1,0 +1,98 @@
+[
+  {
+    "question": "Hello",
+    "answer": "Hi there! How can I help you today?"
+  },
+  {
+    "question": "Hi",
+    "answer": "Hello! What can I do for you?"
+  },
+  {
+    "question": "Hey",
+    "answer": "Hey! How can I assist you?"
+  },
+  {
+    "question": "Good morning",
+    "answer": "Good morning! How may I assist you?"
+  },
+  {
+    "question": "Goodbye",
+    "answer": "Goodbye! Have a great day!"
+  },
+  {
+    "question": "Bye",
+    "answer": "Bye! Take care!"
+  },
+  {
+    "question": "What is your name?",
+    "answer": "I'm your friendly Slack bot, here to help you!"
+  },
+  {
+    "question": "How are you?",
+    "answer": "I'm just a bot, but I'm here and ready to assist you!"
+  },
+  {
+    "question": "Who created you?",
+    "answer": "I was created by an awesome developer like you!"
+  },
+  {
+    "question": "What can you do?",
+    "answer": "I can answer your FAQs, assist with tasks, and keep you company!"
+  },
+  {
+    "question": "Thank you",
+    "answer": "You're welcome! Happy to help."
+  },
+  {
+    "question": "Thanks",
+    "answer": "Anytime! Let me know if you need anything else."
+  },
+  {
+    "question": "What is your return policy?",
+    "answer": "You can return any unused item within 30 days of purchase for a full refund. Items must be in original packaging."
+  },
+  {
+    "question": "How do I reset my password?",
+    "answer": "Click 'Forgot Password' on the login page and follow the instructions sent to your registered email."
+  },
+  {
+    "question": "Do you offer international shipping?",
+    "answer": "Yes, we ship to over 50 countries worldwide. Shipping fees and delivery times vary by location."
+  },
+  {
+    "question": "How can I contact customer support?",
+    "answer": "You can email support@company.com or call our toll-free number at 1-800-123-4567."
+  },
+  {
+    "question": "What payment methods do you accept?",
+    "answer": "We accept Visa, MasterCard, PayPal, Apple Pay, and Google Pay."
+  },
+  {
+    "question": "Can I track my order?",
+    "answer": "Yes, once your order ships, you will receive a tracking number via email."
+  },
+  {
+    "question": "What are your business hours?",
+    "answer": "Our support team is available Monday–Friday, 9 AM to 6 PM (EST)."
+  },
+  {
+    "question": "Do you provide bulk order discounts?",
+    "answer": "Yes, we offer special pricing for bulk orders. Please contact sales@company.com for details."
+  },
+  {
+    "question": "Can I change my order after placing it?",
+    "answer": "You can modify your order within 2 hours of purchase by contacting our support team."
+  },
+  {
+    "question": "What is the warranty on your products?",
+    "answer": "All our products come with a 1-year warranty against manufacturing defects."
+  },
+  {
+    "question": "How do I unsubscribe from the newsletter?",
+    "answer": "Click the 'Unsubscribe' link at the bottom of any newsletter email."
+  },
+  {
+    "question": "Do you offer gift cards?",
+    "answer": "Yes, digital gift cards are available in various denominations."
+  }
+]

@@ -1,0 +1,13 @@
+# .gitignore
+
+# Ignore environment files
+.env
+
+# Ignore venv folder
+venv/
+
+# Ignore faiss_idex folder
+faiss_idex/
+
+# Ignore faiss_idex folder
+_pycache_/
