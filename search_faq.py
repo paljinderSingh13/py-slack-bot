@@ -38,15 +38,20 @@ def get_embedding(text):
 def search_faq(query, top_k=3):
     query_vector = get_embedding(query).reshape(1, -1)
     distances, indices = index.search(query_vector, top_k)
-    
+     
     results = []
     for dist, idx in zip(distances[0], indices[0]):
         if idx < len(metadata):
-            results.append({
-                "question": metadata[idx]["question"],
-                "answer": metadata[idx]["answer"],
+            item = metadata[idx]
+            result = {
+                "question": item["question"],
+                "answer": item["answer"],
                 "score": float(dist)
-            })
+            }
+            # Include image_url if available
+            if "image_url" in item:
+                result["image_url"] = item["image_url"]
+            results.append(result)
     return results
 
 # If run directly, allow interactive search

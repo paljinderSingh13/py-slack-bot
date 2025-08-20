@@ -1,7 +1,14 @@
 [
   {
-    "question": "Hello",
-    "answer": "Hi there! How can I help you today?"
+    "question": "How do I add pixels?",
+    "text_1": "Go to Stores",
+    "image_1": "https://recstep.com/bot/go_to_store.png",
+    "text_2": "Click on the title:",
+    "image_2": "https://recstep.com/bot/title.png",
+    "text_3": "Go to “Conversion tracking” tab",
+    "image_3": "https://recstep.com/bot/title.png/conversion_tracking.png",
+    "text_4": "Click on “add tracking” include all relevant information and click on “add”",
+    "image_4": "https://recstep.com/bot/title.png/add_tracking_form.png"
   },
   {
     "question": "Hi",
@@ -53,7 +60,8 @@
   },
   {
     "question": "How do I reset my password?",
-    "answer": "Click 'Forgot Password' on the login page and follow the instructions sent to your registered email."
+    "answer": "Click 'Forgot Password' on the login page and follow the instructions sent to your registered email.",
+    "image_url": "https://olli.uconn.edu/wp-content/uploads/sites/306/2014/10/Recover-Password-Step-6A-e1412345703206.png"
   },
   {
     "question": "Do you offer international shipping?",

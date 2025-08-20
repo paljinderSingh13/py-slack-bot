@@ -108,6 +108,16 @@ def handle_message_events(message, say):
         print(f"DEBUG: distance={distance}, question={top_result.get('question')}")
 
         if distance is not None and distance <= DISTANCE_THRESHOLD:
+            if top_result.get("image_url"): 
+                say({
+                    "blocks": [
+                        {
+                            "type": "image",
+                            "image_url": top_result["image_url"],
+                            "alt_text": "FAQ Image"
+                        }
+                    ]
+                })
             say(top_result["answer"])
             return
 
@@ -115,14 +125,16 @@ def handle_message_events(message, say):
     category = classify_category(user_text)
 
     if category and category in CATEGORY_CONTACTS:
-        contact = CATEGORY_CONTACTS[category]       
-        say(f"1:I currently don't know that answer, but {contact} can assist you.")
+        contact = CATEGORY_CONTACTS[category]
+
+        say(f"I currently don't know that answer, but {contact} can assist you.")
+
     else:
         category = classify_category_gpt(user_text)
         if category:
-            say(f"2:I currently don't know that answer, but {CATEGORY_CONTACTS[category]} can assist you.")
+            say(f"I currently don't know that answer, but {CATEGORY_CONTACTS[category]} can assist you.")
         else:
-            say("2 I currently don't know that answer.")
+            say(f"I currently don't know that answer.")
    
 
 # Flask app for Slack events
