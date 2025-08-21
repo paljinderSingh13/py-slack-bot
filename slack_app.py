@@ -4,6 +4,7 @@ from slack_bolt.adapter.flask import SlackRequestHandler
 from flask import Flask, request
 from dotenv import load_dotenv
 from openai import OpenAI  # OpenAI Python SDK v0.27.0+
+from slack_sdk import WebClient
 
 # Import your existing FAQ search function
 from search_faq import search_faq
@@ -93,11 +94,14 @@ def classify_category_gpt(query):
 
 
 @app.message("")
-def handle_message_events(message, say):
+def handle_message_events(message, say, client: WebClient):
     user_text = message.get("text", "").strip()
     if not user_text:
         say("Please send a valid message.")
         return
+
+    channel_id = message["channel"]
+    parent_ts = message.get("thread_ts") or message.get("ts")  # ✅ Thread timestamp
 
     # Step 1: Search FAISS
     results = search_faq(user_text, top_k=1)
@@ -108,28 +112,36 @@ def handle_message_events(message, say):
         print(f"DEBUG: distance={distance}, question={top_result.get('question')}")
 
         if distance is not None and distance <= DISTANCE_THRESHOLD:
-            if top_result.get("image_url"): 
-                say({
-                    "blocks": [
+            # If there's a main image → send it in thread
+            if top_result.get("image_url"):
+                client.chat_postMessage(
+                    channel=channel_id,
+                    thread_ts=parent_ts,
+                    blocks=[
                         {
                             "type": "image",
                             "image_url": top_result["image_url"],
                             "alt_text": "FAQ Image"
                         }
                     ]
-                })
+                )
+
             answer = top_result.get("answer")
 
             # Case 1: Answer is a simple string
             if isinstance(answer, str):
-                say(answer)
+                client.chat_postMessage(
+                    channel=channel_id,
+                    thread_ts=parent_ts,
+                    text=answer
+                )
 
             # Case 2: Answer is a list of steps with text + images
             elif isinstance(answer, list):
                 for step in answer:
                     blocks = []
 
-                    # If step has text, add section block
+                    # If step has text → add section block
                     if "text" in step and step["text"]:
                         blocks.append({
                             "type": "section",
@@ -139,7 +151,7 @@ def handle_message_events(message, say):
                             }
                         })
 
-                    # If step has image, add image block
+                    # If step has image → add image block
                     if "image" in step and step["image"]:
                         blocks.append({
                             "type": "image",
@@ -148,24 +160,38 @@ def handle_message_events(message, say):
                         })
 
                     if blocks:
-                        say({"blocks": blocks})
+                        client.chat_postMessage(
+                            channel=channel_id,
+                            thread_ts=parent_ts,
+                            blocks=blocks
+                        )
 
-            return 
+            return  # ✅ Stop here if answer found
 
     # Step 2: No match → classify via GPT
     category = classify_category(user_text)
 
     if category and category in CATEGORY_CONTACTS:
         contact = CATEGORY_CONTACTS[category]
-
-        say(f"I currently don't know that answer, but {contact} can assist you.")
-
+        client.chat_postMessage(
+            channel=channel_id,
+            thread_ts=parent_ts,
+            text=f"I currently don't know that answer, but {contact} can assist you."
+        )
     else:
         category = classify_category_gpt(user_text)
         if category:
-            say(f"I currently don't know that answer, but {CATEGORY_CONTACTS[category]} can assist you.")
+            client.chat_postMessage(
+                channel=channel_id,
+                thread_ts=parent_ts,
+                text=f"I currently don't know that answer, but {CATEGORY_CONTACTS[category]} can assist you."
+            )
         else:
-            say(f"I currently don't know that answer.")
+            client.chat_postMessage(
+                channel=channel_id,
+                thread_ts=parent_ts,
+                text="I currently don't know that answer."
+            )
    
 
 # Flask app for Slack events
