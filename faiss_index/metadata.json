@@ -1,14 +1,228 @@
 [
   {
     "question": "How do I add pixels?",
-    "text_1": "Go to Stores",
-    "image_1": "https://recstep.com/bot/go_to_store.png",
-    "text_2": "Click on the title:",
-    "image_2": "https://recstep.com/bot/title.png",
-    "text_3": "Go to “Conversion tracking” tab",
-    "image_3": "https://recstep.com/bot/title.png/conversion_tracking.png",
-    "text_4": "Click on “add tracking” include all relevant information and click on “add”",
-    "image_4": "https://recstep.com/bot/title.png/add_tracking_form.png"
+    "answer": [
+      {
+        "text": "a) Go to Stores",
+        "image": "https://recstep.com/bot/go_to_store.png"
+      },
+      {
+        "text": "b) Click on the title:",
+        "image": "https://recstep.com/bot/title.png"
+      },
+      {
+        "text": "c) Go to 'Conversion tracking' tab",
+        "image": "https://recstep.com/bot/conversion_tracking.png"
+      },
+      {
+        "text": "d) Click on 'add tracking' include all relevant information and click on add",
+        "image": "https://recstep.com/bot/add_tracking_form.png"
+      }
+    ]
+  },
+  {
+    "question": "How do I set shipping options?",
+    "answer": [
+      {
+        "text": "a) Go to Stores",
+        "image": "https://recstep.com/bot/go_to_store.png"
+      },
+      {
+        "text": "b) Click on the title:",
+        "image": "https://recstep.com/bot/title.png"
+      },
+      {
+        "text": "c) Go to shipping",
+        "image": "https://recstep.com/bot/shipping.png"
+      },
+      {
+        "text": "d) Enter the details and click on “add”",
+        "image": "https://recstep.com/bot/shipping_fom_add.png"
+      }
+    ]
+  },
+  {
+    "question": "How do I publish checkout pages live?",
+    "answer": [
+      {
+        "text": "a) Go to stores:",
+        "image": "https://recstep.com/bot/go_to_store.png"
+      },
+      {
+        "text": "b) Click on the title:",
+        "image": "https://recstep.com/bot/title.png"
+      },
+      {
+        "text": "c) Go to Checkout",
+        "image": "https://recstep.com/bot/checkout.png"
+      },
+      {
+        "text": "d) Click on 'add to checkout funnel'",
+        "image": "https://recstep.com/bot/checkout_funnel.png"
+      }
+    ]
+  },
+  {
+    "question": "How do I perform split tests on my page?",
+    "answer": [
+      {
+        "text": "a) Go to stores:",
+        "image": "https://recstep.com/bot/go_to_store.png"
+      },
+      {
+        "text": "b) Click on the title:",
+        "image": "https://recstep.com/bot/title.png"
+      },
+      {
+        "text": "c) Go to Checkout",
+        "image": "https://recstep.com/bot/checkout.png"
+      },
+      {
+        "text": "d) Enter the traffic allocation as you wish to test ",
+        "image": "https://recstep.com/bot/traffic_allocation.png"
+      },
+      {
+        "text": "e) toggle the active button ",
+        "image": "https://recstep.com/bot/toggle.png"
+      }
+    ]
+  },
+  {
+    "question": "How can I change the layout from the checkout page",
+    "answer": [
+      {
+        "text": "a) Go to stores:",
+        "image": "https://recstep.com/bot/go_to_store.png"
+      },
+      {
+        "text": "b) Click on the title:",
+        "image": "https://recstep.com/bot/title.png"
+      },
+      {
+        "text": "c) Go to Checkout",
+        "image": "https://recstep.com/bot/checkout.png"
+      },
+      {
+        "text": "d) Click on the eyeball",
+        "image": "https://recstep.com/bot/eyeball.png"
+      },
+      {
+        "text": "e) Do the changes as needed and click on “Publish”",
+        "image": "https://recstep.com/bot/publish.png"
+      }
+    ]
+  },
+  {
+    "question": "How can I change the subs price/rebill period?",
+    "answer": [
+      {
+        "text": "a) Go to ecommerce and then 'Products' ",
+        "image": "https://recstep.com/bot/ecommerce_products.png"
+      },
+      {
+        "text": "b) Click on filter and filter by 'Recurring'",
+        "image": "https://recstep.com/bot/recurring.png"
+      },
+      {
+        "text": "c) Click on the pencil icon ",
+        "image": "https://recstep.com/bot/pencil_icon.png"
+      },
+      {
+        "text": "d)Click on “pencil” icon to modify the price",
+        "image": "https://recstep.com/bot/pencil_modify.png"
+      }
+    ]
+  },
+  {
+    "question": "How can I refund a transaction?",
+    "answer": [
+      {
+        "text": "a) Click on transaction",
+        "image": "https://recstep.com/bot/transaction.png"
+      },
+      {
+        "text": "b) enter the dates ",
+        "image": "https://recstep.com/bot/dates.png"
+      },
+      {
+        "text": "c) enter any piece of information that can narrow down the search and click on “Apply” ",
+        "image": "https://recstep.com/bot/narrow.png"
+      },
+      {
+        "text": "d) Locate the transaction and click on the lighting icon ",
+        "image": "https://recstep.com/bot/locate_transaction.png"
+      },
+      {
+        "text": "e) Click on 'refund'",
+        "image": "https://recstep.com/bot/refund.png"
+      }
+    ]
+  },
+  {
+    "question": "How can I can cancel a membership?",
+    "answer": [
+      {
+        "text": "a) Click on transaction",
+        "image": "https://recstep.com/bot/transaction.png"
+      },
+      {
+        "text": "b) enter the dates ",
+        "image": "https://recstep.com/bot/dates.png"
+      },
+      {
+        "text": "c) enter any piece of information that can narrow down the search and click on “Apply” ",
+        "image": "https://recstep.com/bot/narrow.png"
+      },
+      {
+        "text": "d) Locate the transaction and click on the lighting icon ",
+        "image": "https://recstep.com/bot/locate_transaction.png"
+      },
+      {
+        "text": "e) Click on change subscription",
+        "image": "https://recstep.com/bot/subscription.png"
+      },
+      {
+        "text": "f) Click on 'cancelled'",
+        "image": "https://recstep.com/bot/cancel.png"
+      }
+    ]
+  },
+  {
+    "question": "How can I check the the future date rebills?",
+    "answer": [
+      {
+        "text": "a) Go to subscription",
+        "image": "https://recstep.com/bot/subscription_menu.png"
+      },
+      {
+        "text": "b) You can look at the next billing date column",
+        "image": "https://recstep.com/bot/billing_date.png"
+      },
+      {
+        "text": "Note *This info can be exported as a CSV file "
+      }
+    ]
+  },
+  {
+    "question": "How can I enable the abandon cart feature?",
+    "answer": [
+      {
+        "text": "a) Go to stores:",
+        "image": "https://recstep.com/bot/go_to_store.png"
+      },
+      {
+        "text": "b) Click on the pencil icon ",
+        "image": "https://recstep.com/bot/pencil.png"
+      },
+      {
+        "text": "c) click on “other option”",
+        "image": "https://recstep.com/bot/other_option.png"
+      },
+      {
+        "text": "d) click on any of the options depending on what do you want to trigger ",
+        "image": "https://recstep.com/bot/trigger.png"
+      }
+    ]
   },
   {
     "question": "Hi",
@@ -19,88 +233,8 @@
     "answer": "Hey! How can I assist you?"
   },
   {
-    "question": "Good morning",
-    "answer": "Good morning! How may I assist you?"
-  },
-  {
-    "question": "Goodbye",
-    "answer": "Goodbye! Have a great day!"
-  },
-  {
-    "question": "Bye",
-    "answer": "Bye! Take care!"
-  },
-  {
-    "question": "What is your name?",
-    "answer": "I'm your friendly Slack bot, here to help you!"
-  },
-  {
-    "question": "How are you?",
-    "answer": "I'm just a bot, but I'm here and ready to assist you!"
-  },
-  {
-    "question": "Who created you?",
-    "answer": "I was created by an awesome developer like you!"
-  },
-  {
-    "question": "What can you do?",
-    "answer": "I can answer your FAQs, assist with tasks, and keep you company!"
-  },
-  {
-    "question": "Thank you",
-    "answer": "You're welcome! Happy to help."
-  },
-  {
-    "question": "Thanks",
-    "answer": "Anytime! Let me know if you need anything else."
-  },
-  {
-    "question": "What is your return policy?",
-    "answer": "You can return any unused item within 30 days of purchase for a full refund. Items must be in original packaging."
-  },
-  {
     "question": "How do I reset my password?",
     "answer": "Click 'Forgot Password' on the login page and follow the instructions sent to your registered email.",
     "image_url": "https://olli.uconn.edu/wp-content/uploads/sites/306/2014/10/Recover-Password-Step-6A-e1412345703206.png"
-  },
-  {
-    "question": "Do you offer international shipping?",
-    "answer": "Yes, we ship to over 50 countries worldwide. Shipping fees and delivery times vary by location."
-  },
-  {
-    "question": "How can I contact customer support?",
-    "answer": "You can email support@company.com or call our toll-free number at 1-800-123-4567."
-  },
-  {
-    "question": "What payment methods do you accept?",
-    "answer": "We accept Visa, MasterCard, PayPal, Apple Pay, and Google Pay."
-  },
-  {
-    "question": "Can I track my order?",
-    "answer": "Yes, once your order ships, you will receive a tracking number via email."
-  },
-  {
-    "question": "What are your business hours?",
-    "answer": "Our support team is available Monday–Friday, 9 AM to 6 PM (EST)."
-  },
-  {
-    "question": "Do you provide bulk order discounts?",
-    "answer": "Yes, we offer special pricing for bulk orders. Please contact sales@company.com for details."
-  },
-  {
-    "question": "Can I change my order after placing it?",
-    "answer": "You can modify your order within 2 hours of purchase by contacting our support team."
-  },
-  {
-    "question": "What is the warranty on your products?",
-    "answer": "All our products come with a 1-year warranty against manufacturing defects."
-  },
-  {
-    "question": "How do I unsubscribe from the newsletter?",
-    "answer": "Click the 'Unsubscribe' link at the bottom of any newsletter email."
-  },
-  {
-    "question": "Do you offer gift cards?",
-    "answer": "Yes, digital gift cards are available in various denominations."
   }
 ]

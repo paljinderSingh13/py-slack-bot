@@ -118,8 +118,39 @@ def handle_message_events(message, say):
                         }
                     ]
                 })
-            say(top_result["answer"])
-            return
+            answer = top_result.get("answer")
+
+            # Case 1: Answer is a simple string
+            if isinstance(answer, str):
+                say(answer)
+
+            # Case 2: Answer is a list of steps with text + images
+            elif isinstance(answer, list):
+                for step in answer:
+                    blocks = []
+
+                    # If step has text, add section block
+                    if "text" in step and step["text"]:
+                        blocks.append({
+                            "type": "section",
+                            "text": {
+                                "type": "mrkdwn",
+                                "text": step["text"]
+                            }
+                        })
+
+                    # If step has image, add image block
+                    if "image" in step and step["image"]:
+                        blocks.append({
+                            "type": "image",
+                            "image_url": step["image"],
+                            "alt_text": "FAQ Image"
+                        })
+
+                    if blocks:
+                        say({"blocks": blocks})
+
+            return 
 
     # Step 2: No match → classify via GPT
     category = classify_category(user_text)
