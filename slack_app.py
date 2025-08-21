@@ -101,9 +101,8 @@ def handle_message_events(message, say, client: WebClient):
         return
 
     channel_id = message["channel"]
-    parent_ts = message.get("thread_ts") or message.get("ts")  # ✅ Thread timestamp
 
-    # Step 1: Search FAISS
+    # Step 1: Search FAISS for matching FAQ
     results = search_faq(user_text, top_k=1)
 
     if results and len(results) > 0:
@@ -112,32 +111,27 @@ def handle_message_events(message, say, client: WebClient):
         print(f"DEBUG: distance={distance}, question={top_result.get('question')}")
 
         if distance is not None and distance <= DISTANCE_THRESHOLD:
-            # If there's a main image → send it in thread
-            if top_result.get("image_url"):
-                client.chat_postMessage(
-                    channel=channel_id,
-                    thread_ts=parent_ts,
-                    blocks=[
-                        {
-                            "type": "image",
-                            "image_url": top_result["image_url"],
-                            "alt_text": "FAQ Image"
-                        }
-                    ]
-                )
-
             answer = top_result.get("answer")
 
-            # Case 1: Answer is a simple string
+            # STEP 1️⃣ → Post the FIRST message (main reply, outside thread)
             if isinstance(answer, str):
-                client.chat_postMessage(
+                main_message = client.chat_postMessage(
                     channel=channel_id,
-                    thread_ts=parent_ts,
                     text=answer
                 )
+                return
 
-            # Case 2: Answer is a list of steps with text + images
             elif isinstance(answer, list):
+                # ✅ Post a general intro message (main reply)
+                main_message = client.chat_postMessage(
+                    channel=channel_id,
+                    text="To solve this, follow these steps:"
+                )
+
+                # Extract parent_ts for threading
+                parent_ts = main_message["ts"]
+
+                # STEP 2️⃣ → Send each step as a THREAD reply
                 for step in answer:
                     blocks = []
 
@@ -166,16 +160,15 @@ def handle_message_events(message, say, client: WebClient):
                             blocks=blocks
                         )
 
-            return  # ✅ Stop here if answer found
+                return  # ✅ Done
 
-    # Step 2: No match → classify via GPT
+    # Step 2: No match → fallback to GPT classification
     category = classify_category(user_text)
 
     if category and category in CATEGORY_CONTACTS:
         contact = CATEGORY_CONTACTS[category]
         client.chat_postMessage(
             channel=channel_id,
-            thread_ts=parent_ts,
             text=f"I currently don't know that answer, but {contact} can assist you."
         )
     else:
@@ -183,13 +176,11 @@ def handle_message_events(message, say, client: WebClient):
         if category:
             client.chat_postMessage(
                 channel=channel_id,
-                thread_ts=parent_ts,
                 text=f"I currently don't know that answer, but {CATEGORY_CONTACTS[category]} can assist you."
             )
         else:
             client.chat_postMessage(
                 channel=channel_id,
-                thread_ts=parent_ts,
                 text="I currently don't know that answer."
             )
    
