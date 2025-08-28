@@ -5,6 +5,10 @@ from flask import Flask, request
 from dotenv import load_dotenv
 from openai import OpenAI  # OpenAI Python SDK v0.27.0+
 from slack_sdk import WebClient
+import spacy
+
+# Load English NLP model
+nlp = spacy.load("en_core_web_sm")
 
 # Import your existing FAQ search function
 from search_faq import search_faq
@@ -22,6 +26,35 @@ openai_client = OpenAI(api_key=os.environ["OPENAI_API_KEY"])
 
 # Threshold for FAQ search confidence (adjust based on your index)
 # SIMILARITY_THRESHOLD = 0.25  # Example threshold
+def generate_dynamic_title(question: str) -> str:
+    """
+    Generate a dynamic, human-like title from the user's question.
+    Example: "How can I refund a transaction?" → "To refund a transaction, follow these steps:"
+    """
+    doc = nlp(question.lower())
+
+    # Extract the main verb + object
+    verb = None
+    obj = None
+
+    for token in doc:
+        # Find the first verb in the sentence
+        if token.pos_ == "VERB" and not verb:
+            verb = token.lemma_
+        # Find the first noun or pronoun as object
+        if token.dep_ in ("dobj", "pobj") and not obj:
+            obj = " ".join([child.text for child in token.subtree])
+            break
+
+    # Build the final title
+    if verb and obj:
+        return f"To {verb} {obj}, follow these steps:"
+    elif verb:
+        return f"To {verb}, follow these steps:"
+    else:
+        # Fallback if parsing fails
+        return "Here are the steps to follow:"
+
 
 def call_gpt4_response(user_text: str) -> str:
     """
@@ -95,6 +128,11 @@ def classify_category_gpt(query):
 
 @app.message("")
 def handle_message_events(message, say, client: WebClient):
+    user_id = message.get("user") 
+    STAFF_IDS = {"ULC554ETG", "U12345678", "U87654321"}  
+    if user_id in STAFF_IDS:
+        # say("bot will not respond to internal team member.")
+        return
     user_text = message.get("text", "").strip()
     if not user_text:
         say("Please send a valid message.")
@@ -109,6 +147,7 @@ def handle_message_events(message, say, client: WebClient):
         top_result = results[0]
         distance = top_result.get("score", None)
         print(f"DEBUG: distance={distance}, question={top_result.get('question')}")
+        matched_question = top_result.get("question", "").strip()
 
         if distance is not None and distance <= DISTANCE_THRESHOLD:
             answer = top_result.get("answer")
@@ -123,9 +162,10 @@ def handle_message_events(message, say, client: WebClient):
 
             elif isinstance(answer, list):
                 # ✅ Post a general intro message (main reply)
+                dynamic_title = generate_dynamic_title(matched_question)
                 main_message = client.chat_postMessage(
                     channel=channel_id,
-                    text="To solve this, follow these steps:"
+                    text=dynamic_title #"To solve this, follow these steps:"
                 )
 
                 # Extract parent_ts for threading
