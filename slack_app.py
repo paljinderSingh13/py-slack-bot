@@ -129,8 +129,13 @@ def classify_category_gpt(query):
 @app.message("")
 def handle_message_events(message, say, client: WebClient):
     user_id = message.get("user") 
-    STAFF_IDS = {"ULC554ETG", "U12345678", "U87654321"}  
-    if user_id in STAFF_IDS:
+    # STAFF_IDS = {"ULC554ETG", "U12345678", "U87654321"}  
+    STAFF_EMAILS = {
+                "paljinder@gmail.com", "adam@phoenixtechnologies.io", "albert@phoenixtechnologies.io", "anastasia@phoenixtechnologies.io", "ankush@phoenixtechnologies.io", "cody@phoenixtechnologies.io", "david@phoenixtechnologies.io", "enrique@phoenixtechnologies.io", "erick@phoenixtechnologies.io", "fernando@phoenixtechnologies.io", "harshini@phoenixtechnologies.io", "heath@phoenixtechnologies.io", "jaimin@phoenixtechnologies.io", "jayanth@phoenixtechnologies.io", "jonalyn@phoenixtechnologies.io", "jordan@phoenixtechnologies.io", "kani@phoenixtechnologies.io", "kevin@phoenixtechnologies.io", "lee@phoenixtechnologies.io", "nitish@phoenixtechnologies.io", "omar@phoenixtechnologies.io", "pragi@phoenixtechnologies.io", "puvi@phoenixtechnologies.io", "raoul@phoenixtechnologies.io", "rhealey@phoenixtechnologies.io", "ryanne@phoenixtechnologies.io", "sarbjit@phoenixtechnologies.io", "stas@phoenixtechnologies.io", "stephen@phoenixtechnologies.io", "steven@phoenixtechnologies.io", "tatiana@phoenixtechnologies.io", "tim@phoenixtechnologies.io", "tom@phoenixtechnologies.io", "tony@phoenixtechnologies.io", "trevor@phoenixtechnologies.io", "umesh@phoenixtechnologies.io"
+            }
+    user_info = client.users_info(user=user_id)
+    user_email = user_info["user"]["profile"].get("email")
+    if user_email in STAFF_EMAILS:
         # say("bot will not respond to internal team member.")
         return
     user_text = message.get("text", "").strip()
